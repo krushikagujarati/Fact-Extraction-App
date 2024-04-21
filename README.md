@@ -1,6 +1,6 @@
 # Fact-Extraction from Call-log
 
-![image](https://github.com/krushikagujarati/Fact-Extraction-App/assets/48424819/a3a8e146-0547-49df-84b6-50a94b1fbdfa)
+![image](https://github.com/krushikagujarati/Fact-Extraction-App/assets/48424819/21f778bc-59c9-4cda-95b5-d6b2c879bb35)
 
 
 ## Project Overview
