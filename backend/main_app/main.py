@@ -12,7 +12,6 @@ load_dotenv()
 
 
 app = FastAPI()
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  
@@ -62,39 +61,44 @@ async def process_documents(question: str, documents: List[str]):
         database['error'] = str(e)
 
 def extract_facts(question: str, text: str) -> List[str]:
-    headers = {
-    "Content-Type": "application/json",
-    "Authorization": f"Bearer {os.getenv('API_key')}"
-    }
-
-    data = {
-        "model": "gpt-3.5-turbo",
-        "messages": [
-        {
-            "role": "system",
-            "content": "You are a helpful assistant."
-        },
-        {
-            "role": "user",
-            "content": f"Question: {question}\nText: {text}\nExtract facts:"
+    try:
+        headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {os.getenv('API_key')}"
         }
-        ],
-        "max_tokens": 1024,
-        "n": 1,
-        "stop": None,
-        "temperature": 0.7,
-    }
 
-    response = requests.post(url, headers=headers, json=data)
+        data = {
+            "model": "gpt-4",
+            "messages": [
+            {
+                "role": "system",
+                "content": "You are a helpful assistant."
+            },
+            {
+                "role": "user",
+                "content": f"Question: {question}\nText: {text}\nExtract facts:"
+            }
+            ],
+            "max_tokens": 1024,
+            "n": 1,
+            "stop": None,
+            "temperature": 0.7,
+        }
 
-    # Check if the request was successful
-    if response.status_code == 200:
-        print("Response from OpenAI:", response.json())
-        print('\n')
-        print(response.json()['choices'][0]['message']['content'])
-        lines = response.json()['choices'][0]['message']['content'].split('\n')
-        lines = [line.strip() for line in lines if line.strip()]
-        return lines
+        response = requests.post(url, headers=headers, json=data)
+        print("res=>",response.content)
+        # Check if the request was successful
+        if response.status_code == 200:
+            print("Response from OpenAI:", response.json())
+            print('\n')
+            print(response.json()['choices'][0]['message']['content'])
+            lines = response.json()['choices'][0]['message']['content'].split('\n')
+            lines = [line.strip() for line in lines if line.strip()]
+            return lines
+    except Exception as e:
+        print("err1=>",e)
+
+    
 
 @app.get("/get_question_and_facts")
 def get_question_and_facts() -> GetQuestionAndFactsResponse:
