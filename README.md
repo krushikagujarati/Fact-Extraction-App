@@ -2,6 +2,7 @@
 
 ![image](https://github.com/krushikagujarati/Fact-Extraction-App/assets/48424819/21f778bc-59c9-4cda-95b5-d6b2c879bb35)
 
+![image](https://github.com/krushikagujarati/Fact-Extraction-App/assets/48424819/b3c1819b-bd0d-4cae-a0e2-3e5d2fe37d52)
 
 ## Project Overview
 This Call Log Analyzer App helps users to quickly extract important information from call logs using OpenAI's GPT-4 model. The application is built using FastAPI for the backend to manage data processing efficiently, and React for the frontend to provide a user-friendly interface.
